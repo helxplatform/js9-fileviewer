@@ -1,0 +1,45 @@
+image:
+  repository: wtstephens/js9docker
+  tag: "0.0.1"
+  env:
+    - name: S3_ACCESS_KEY_ID
+      value: "--placeholder--"
+    - name: S3_SECRET_ACCESS_KEY
+      value: "--placeholder--"
+
+extraEnv:
+  S3_ACCESS_KEY_ID: "---placeholder---"
+  S3_SECRET_ACCESS_KEY: "---placeholder---"
+
+resources:
+  limits:
+    memory: 1024Mi
+  requests:
+    memory: 512Mi
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: js9fileviewer.apps.renci.org
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: js9fileviewer
+              port:
+                number: 8080
+        - path: /socket.io
+          pathType: Prefix
+          backend:
+            service:
+              name: js9fileviewer-helper
+              port:
+                number: 443
+  tls:
+   - secretName: js9fileviewer.apps.renci.org-tls
+     hosts:
+       - js9fileviewer.apps.renci.org
