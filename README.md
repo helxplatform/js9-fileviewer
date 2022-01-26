@@ -23,9 +23,9 @@ In the `deployment` folder are instructions on how the js9 viewer is deployed to
 
 -----
 
-## Sample lightcurve screenshots
+## Sample JS9 screenshots
 
-Evryscope lightcurve-server home page:
+JS9 server home page:
 
 ![fits-viewer](images/fits-viewer.png)
 
