@@ -12,12 +12,12 @@ RUN make
 RUN make install
 RUN rm /cfitsio-4.0.0.tar.gz
 
-# Copy in all files
-#COPY . /
+# Setup root folder
 WORKDIR /
 
 # Get and unpack JS9 (with monkey-business to get the files into the root)
-COPY js9-master-2022-01-26.zip /js9-master.zip
+#COPY js9-master-2022-01-26.zip /js9-master.zip
+COPY js9-master-2022-02-17.zip /js9-master.zip
 RUN unzip js9-master.zip
 RUN rm js9-master.zip
 WORKDIR /js9-master
@@ -30,6 +30,10 @@ RUN rm js9-master.tar.gz
 # Get our customizations
 COPY js9Prefs.json /
 COPY js9prefs.js /
+
+# debug hacks
+COPY js9-source-tmp/js9-master/js9.html /
+COPY js9-source-tmp/js9-master/js9.js /
 
 # Snippet from js9 help:
 # -----
