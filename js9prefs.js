@@ -1,7 +1,7 @@
 var JS9Prefs = {
     "globalOpts": {
         "helperType":       "nodejs",
-        "helperPort":       443,
+        "helperPort":       2718,
         "helperCGI":        "./cgi-bin/js9/js9Helper.cgi",
         "debug":            0,
         "loadProxy":        true,

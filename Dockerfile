@@ -32,8 +32,10 @@ COPY js9Prefs.json /
 COPY js9prefs.js /
 
 # debug hacks
-COPY js9-source-tmp/js9-master/js9.html /
-COPY js9-source-tmp/js9-master/js9.js /
+#COPY js9-source-tmp/js9-master/js9.html /
+COPY js9.html /
+#COPY js9-source-tmp/js9-master/js9.js /
+COPY js9.js /
 
 # Snippet from js9 help:
 # -----
@@ -53,4 +55,7 @@ RUN make install
 
 COPY start-argus-js9.sh /
 WORKDIR /js9www
+#RUN mkdir tmp
+#RUN chown -R 1001:1001 ./tmp
+#USER 1001
 CMD ["sh", "/start-argus-js9.sh"]

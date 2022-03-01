@@ -1,6 +1,6 @@
 image:
   repository: wtstephens/js9docker
-  tag: "0.0.2dev3"
+  tag: "0.0.2dev99"
   env:
     - name: S3_ACCESS_KEY_ID
       value: "--placeholder--"
@@ -38,14 +38,14 @@ ingress:
             service:
               name: js9fileviewer-helper
               port:
-                number: 443
+                number: 2718
         - path: /msg
           pathType: Prefix
           backend:
             service:
               name: js9fileviewer-helper
               port:
-                number: 443
+                number: 2718
   tls:
    - secretName: js9fileviewer.apps.renci.org-tls
      hosts:
