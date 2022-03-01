@@ -55,7 +55,7 @@ RUN make install
 
 COPY start-argus-js9.sh /
 WORKDIR /js9www
-#RUN mkdir tmp
-#RUN chown -R 1001:1001 ./tmp
-#USER 1001
+RUN mkdir tmp
+RUN chown -R 1001:1001 ./tmp
+USER 1001
 CMD ["sh", "/start-argus-js9.sh"]
