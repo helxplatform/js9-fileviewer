@@ -1,3 +1,5 @@
+{{- $svcPort := .Values.service.port -}}
+{{- $helperPort := .Values.service.helperport -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,8 +9,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 8080
+    - port: {{ $svcPort }}
+      targetPort: {{ $svcPort }}
       protocol: TCP
       name: http
   selector:
@@ -25,7 +27,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: 443
-      targetPort: 2718
+      targetPort: {{ $helperPort }}
       protocol: TCP
       name: https
   selector:

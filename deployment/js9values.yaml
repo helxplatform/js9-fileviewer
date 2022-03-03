@@ -11,6 +11,13 @@ extraEnv:
   S3_ACCESS_KEY_ID: "---placeholder---"
   S3_SECRET_ACCESS_KEY: "---placeholder---"
 
+service:
+  type: ClusterIP
+  # port that serves the js9 web pages
+  port: 8080
+  # port that serves the js9 helper (socket.io traffic)
+  helperport: 2718
+
 resources:
   limits:
     memory: 1024Mi
@@ -22,30 +29,6 @@ ingress:
   className: ""
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-  hosts:
-    - host: js9fileviewer.apps.renci.org
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer
-              port:
-                number: 8080
-        - path: /socket.io
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer-helper
-              port:
-                number: 2718
-        - path: /msg
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer-helper
-              port:
-                number: 2718
   tls:
    - secretName: js9fileviewer.apps.renci.org-tls
      hosts:
