@@ -3,9 +3,9 @@ js9 FITS format file viewer
 
 ### Example build and run
 ```
-docker build -t wtstephens/js9docker:0.0.1 .
+docker build -t wtstephens/js9docker:0.0.2 .
 
-docker run -p 8080:8080 -p 443:443 wtstephens/js9docker:0.0.1
+docker run -p 8080:8080 -p 443:2718 wtstephens/js9docker:0.0.2
 ```
 And then opening `localhost:8080/` in the browser.
 
