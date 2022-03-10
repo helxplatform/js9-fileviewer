@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "js9fileviewer.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
+{{- $helperPort := .Values.service.helperport -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -48,10 +49,14 @@ spec:
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              {{- $portnumber := $svcPort -}}
+              {{- if ne .path "/" }}
+              {{- $portnumber = 443 -}}
+              {{- end }}
               service:
                 name: {{ $.Release.Name -}} - {{- .backend.service.name }}
                 port:
-                  number: {{ .backend.service.port.number }}
+                  number: {{ $portnumber }}
               {{- else }}
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
