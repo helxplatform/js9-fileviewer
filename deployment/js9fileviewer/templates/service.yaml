@@ -1,0 +1,35 @@
+{{- $svcPort := .Values.service.port -}}
+{{- $helperPort := .Values.service.helperport -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "js9fileviewer.fullname" . }}
+  labels:
+    {{- include "js9fileviewer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ $svcPort }}
+      targetPort: {{ $svcPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "js9fileviewer.selectorLabels" . | nindent 4 }}
+    app: js9docker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "js9fileviewer.fullname" . -}} - {{- "helper" }}
+  labels:
+    {{- include "js9fileviewer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 443
+      targetPort: {{ $helperPort }}
+      protocol: TCP
+      name: https
+  selector:
+    {{- include "js9fileviewer.selectorLabels" . | nindent 4 }}
+    app: js9docker

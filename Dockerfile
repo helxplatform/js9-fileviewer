@@ -12,12 +12,11 @@ RUN make
 RUN make install
 RUN rm /cfitsio-4.0.0.tar.gz
 
-# Copy in all files
-#COPY . /
+# Setup root folder
 WORKDIR /
 
 # Get and unpack JS9 (with monkey-business to get the files into the root)
-COPY js9-master-2022-01-26.zip /js9-master.zip
+COPY js9-master-2022-02-17.zip /js9-master.zip
 RUN unzip js9-master.zip
 RUN rm js9-master.zip
 WORKDIR /js9-master
@@ -30,6 +29,10 @@ RUN rm js9-master.tar.gz
 # Get our customizations
 COPY js9Prefs.json /
 COPY js9prefs.js /
+
+# Get debug customizations (if any)
+COPY js9.html /
+COPY js9.js /
 
 # Snippet from js9 help:
 # -----
@@ -44,9 +47,13 @@ RUN ./configure --with-webdir=/js9www --with-cfitsio=/cfitsio --prefix=/js9run -
 RUN make
 RUN make install
 
-# js9Helper port (originally 2718)
-#EXPOSE 443
+# js9Helper port (default 2718)
+#EXPOSE 2718
 
 COPY start-argus-js9.sh /
 WORKDIR /js9www
+RUN mkdir tmp
+RUN useradd --create-home --home-dir /home/user1001 --shell /bin/bash --uid 1001 user1001
+RUN chown -R 1001:1001 ./tmp
+USER user1001
 CMD ["sh", "/start-argus-js9.sh"]

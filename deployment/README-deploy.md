@@ -1,10 +1,13 @@
 # Sterling deployment
 
-Deploy both the service and the ingress.
-
-Quick summary of the (example) commands:
+## Using helm
 ```
-kubectl -n argus-dev apply -f js9server-service.yaml
+helm --namespace argus-dev upgrade --install argus js9fileviewer --values js9values.yaml
+```
 
-kubectl -n argus-dev apply -f js9server-ingress.yaml
+## Other
+```
+helm install argus-dev js9fileviewer --values js9values.yaml --dry-run
+
+helm --namespace argus-dev delete argus
 ```
