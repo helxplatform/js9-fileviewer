@@ -17,6 +17,8 @@ service:
   port: 8080
   # port that serves the js9 helper (socket.io traffic)
   helperport: 2718
+  # host name
+  hostname: js9fileviewer-dev
 
 resources:
   limits:
@@ -29,7 +31,3 @@ ingress:
   className: ""
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-  tls:
-   - secretName: js9fileviewer.apps.renci.org-tls
-     hosts:
-       - js9fileviewer.apps.renci.org
