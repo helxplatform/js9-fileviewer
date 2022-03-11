@@ -1,0 +1,33 @@
+image:
+  repository: wtstephens/js9docker
+  tag: "0.0.2"
+  env:
+    - name: S3_ACCESS_KEY_ID
+      value: "--placeholder--"
+    - name: S3_SECRET_ACCESS_KEY
+      value: "--placeholder--"
+
+extraEnv:
+  S3_ACCESS_KEY_ID: "---placeholder---"
+  S3_SECRET_ACCESS_KEY: "---placeholder---"
+
+service:
+  type: ClusterIP
+  # port that serves the js9 web pages
+  port: 8080
+  # port that serves the js9 helper (socket.io traffic)
+  helperport: 2718
+  # host name
+  hostname: js9fileviewer
+
+resources:
+  limits:
+    memory: 1024Mi
+  requests:
+    memory: 512Mi
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt

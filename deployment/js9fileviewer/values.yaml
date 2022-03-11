@@ -45,6 +45,8 @@ service:
   port: 8080
   # port that serves the js9 helper (socket.io traffic)
   helperport: 2718
+  # host name
+  hostname: ""
 
 ingress:
   enabled: false
@@ -54,26 +56,22 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: js9fileviewer.apps.renci.org
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer
-        - path: /socket.io/
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer-helper
-        - path: /msg/
-          pathType: Prefix
-          backend:
-            service:
-              name: js9fileviewer-helper
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: js9fileviewer
+    - path: /socket.io/
+      pathType: Prefix
+      backend:
+        service:
+          name: js9fileviewer-helper
+    - path: /msg/
+      pathType: Prefix
+      backend:
+        service:
+          name: js9fileviewer-helper
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
