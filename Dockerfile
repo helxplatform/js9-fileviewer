@@ -33,6 +33,7 @@ COPY js9prefs.js /
 # Get debug customizations (if any)
 COPY js9.html /
 COPY js9.js /
+COPY js9Helper.js /
 
 # Snippet from js9 help:
 # -----

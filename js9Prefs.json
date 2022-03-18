@@ -9,7 +9,8 @@
 		"workDirQuota": 100,
 		"dataPath": "$HOME/Desktop:$HOME/data",
 		"analysisPlugins": "./analysis-plugins",
-		"analysisWrappers": "./analysis-wrappers"
+		"analysisWrappers": "./analysis-wrappers",
+		"remoteMsgsHeader": ""
 	},
 	"imageOpts": {
 		"colormap": "grey",
