@@ -1,6 +1,6 @@
 image:
   repository: wtstephens/js9docker
-  tag: "0.0.2"
+  tag: "0.0.3"
   env:
     - name: S3_ACCESS_KEY_ID
       value: "--placeholder--"

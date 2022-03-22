@@ -67,7 +67,7 @@ ingress:
       backend:
         service:
           name: js9fileviewer-helper
-    - path: /msg/
+    - path: /msg
       pathType: Prefix
       backend:
         service:

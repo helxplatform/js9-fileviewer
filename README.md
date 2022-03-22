@@ -19,7 +19,21 @@ will load a sample FITS image.
 
 ## Deployment to Sterling
 
-In the `deployment` folder are instructions on how the js9 viewer is deployed to the argus-dev namespace on the Sterling cluster.
+In the `deployment` folder are instructions on how the js9 viewer is deployed to the argus and argus-dev namespaces on the RENCI Sterling cluster.
+
+### CLI Query and Control
+
+A deployment can be queried and controlled thru its "html" transport (versus its "socket.io" transport) using its `/msg` path.
+
+Example:
+```
+~ $ wget -q -O- 'https://js9fileviewer.apps.renci.org:443/msg?{"id": "JS9", "cmd": "GetColormap"}'
+{"colormap":"standard","contrast":1,"bias":0.5}
+~ $
+~ $ wget -q -O- 'https://js9fileviewer.apps.renci.org:443/msg?{"id": "JS9", "cmd": "SetColormap", "args": ["red"]}'
+OK
+~ $
+```
 
 -----
 
